@@ -1,0 +1,114 @@
+CREATE DATABASE university;
+USE university;
+
+CREATE TABLE classroom (
+  building VARCHAR(50),
+  room_number VARCHAR(10),
+  capacity INT,
+  PRIMARY KEY (building, room_number)
+);
+
+CREATE TABLE department (
+  dept_name VARCHAR(50) PRIMARY KEY,
+  building VARCHAR(50),
+  budget DECIMAL(10,2)
+);
+
+CREATE TABLE course (
+  course_id VARCHAR(10) PRIMARY KEY,
+  title VARCHAR(100),
+  dept_name VARCHAR(50),
+  credits INT,
+  FOREIGN KEY (dept_name) REFERENCES department(dept_name) ON DELETE CASCADE
+);
+
+CREATE TABLE instructor (
+  ID INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(100),
+  dept_name VARCHAR(50),
+  salary DECIMAL(10,2),
+  FOREIGN KEY (dept_name) REFERENCES department(dept_name) ON DELETE SET NULL
+);
+
+CREATE TABLE section (
+  course_id VARCHAR(10),
+  sec_id VARCHAR(10),
+  semester VARCHAR(10),
+  year INT,
+  building VARCHAR(50),
+  room_number VARCHAR(10),
+  time_slot_id VARCHAR(10),
+  PRIMARY KEY (course_id, sec_id, semester, year),
+  FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE,
+  FOREIGN KEY (building, room_number) REFERENCES classroom(building, room_number) ON DELETE SET NULL
+);
+
+CREATE TABLE teaches (
+  ID INT,
+  course_id VARCHAR(10),
+  sec_id VARCHAR(10),
+  semester VARCHAR(10),
+  year INT,
+  PRIMARY KEY (ID, course_id, sec_id, semester, year),
+  FOREIGN KEY (ID) REFERENCES instructor(ID) ON DELETE CASCADE,
+  FOREIGN KEY (course_id, sec_id, semester, year) REFERENCES section(course_id, sec_id, semester, year) ON DELETE CASCADE
+);
+
+CREATE TABLE student (
+  ID INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(100),
+  dept_name VARCHAR(50),
+  tot_cred INT,
+  FOREIGN KEY (dept_name) REFERENCES department(dept_name) ON DELETE SET NULL
+);
+
+CREATE TABLE takes (
+  ID INT,
+  course_id VARCHAR(10),
+  sec_id VARCHAR(10),
+  semester VARCHAR(10),
+  year INT,
+  grade VARCHAR(2),
+  PRIMARY KEY (ID, course_id, sec_id, semester, year),
+  FOREIGN KEY (ID) REFERENCES student(ID) ON DELETE CASCADE,
+  FOREIGN KEY (course_id, sec_id, semester, year) REFERENCES section(course_id, sec_id, semester, year) ON DELETE CASCADE
+);
+
+CREATE TABLE advisor (
+  s_ID INT,
+  i_ID INT,
+  PRIMARY KEY (s_ID, i_ID),
+  FOREIGN KEY (s_ID) REFERENCES student(ID) ON DELETE CASCADE,
+  FOREIGN KEY (i_ID) REFERENCES instructor(ID) ON DELETE CASCADE
+);
+
+CREATE TABLE time_slot (
+  time_slot_id VARCHAR(10) PRIMARY KEY,
+  day VARCHAR(10),
+  start_time TIME,
+  end_time TIME
+);
+
+CREATE TABLE prereq (
+  course_id VARCHAR(10),
+  prereq_id VARCHAR(10),
+  PRIMARY KEY (course_id, prereq_id),
+  FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE,
+  FOREIGN KEY (prereq_id) REFERENCES course(course_id) ON DELETE CASCADE
+);
+
+SHOW TABLES;
+
+SHOW CREATE TABLE student;
+INSERT INTO student (name, dept_name, tot_cred)
+VALUES ('Priti', 'Cse', 30);
+
+INSERT INTO department (dept_name, building, budget) 
+VALUES ('Cse', 'ccf', 100000);
+
+select * from student;
+
+insert into instructor(ID,name,dept_name,salary)
+values(123,'priya','cse',10000);
+insert into course(course_id,title,dept_name,credits)
+values(123,'6cs301','cse',3);

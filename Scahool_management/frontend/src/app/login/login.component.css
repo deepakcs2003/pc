@@ -1,0 +1,92 @@
+/* Center the login container */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 6px 10px 15px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+/* Style the heading */
+.login-container h2 {
+    margin-bottom: 20px;
+    font-size: 26px;
+    color: #222;
+    font-weight: bold;
+}
+
+/* Style form groups */
+.form-group {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+/* Label styling */
+.form-group label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+/* Input field styling */
+.form-group input {
+    width: 90%;
+    padding: 12px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+/* Highlight input on focus */
+.form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Style the login button */
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #28a745, #1e7e34);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Button hover effect */
+button:hover {
+    background: linear-gradient(45deg, #218838, #1c7430);
+    transform: scale(1.02);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 480px) {
+    .login-container {
+        width: 90%;
+        padding: 18px;
+    }
+
+    .login-container h2 {
+        font-size: 24px;
+    }
+
+    .form-group input {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 16px;
+    }
+}

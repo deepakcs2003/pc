@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="form-section">
+    <h2>Add/Edit Department</h2>
+    <form (ngSubmit)="addDepartment()">
+      <div class="form-group">
+        <label for="dept_name">Department Name:</label>
+        <input [(ngModel)]="departmentForm.dept_name" name="dept_name" required placeholder="Enter department name" />
+      </div>
+
+      <div class="form-group">
+        <label for="building">Building:</label>
+        <input [(ngModel)]="departmentForm.building" name="building" required placeholder="Enter building name" />
+      </div>
+
+      <div class="form-group">
+        <label for="budget">Budget:</label>
+        <input [(ngModel)]="departmentForm.budget" name="budget" required type="number" placeholder="Enter budget amount" />
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div class="course-list">
+    <h2 class="section-title">Department List</h2>
+    <ul *ngIf="departments.length > 0; else emptyState">
+      <li *ngFor="let department of departments" class="course-item">
+        <div class="course-info">
+          <strong>{{ department.dept_name }}</strong> ({{ department.building }}) - ${{ department.budget }}
+        </div>
+        <div class="action-buttons">
+          <button class="edit-btn" (click)="editDepartment(department)">Edit</button>
+          <button class="delete-btn" (click)="deleteDepartment(department.dept_name)">Delete</button>
+        </div>
+      </li>
+    </ul>
+    <ng-template #emptyState>
+      <div class="empty-state">No departments available. Add a new one!</div>
+    </ng-template>
+  </div>
+</div>

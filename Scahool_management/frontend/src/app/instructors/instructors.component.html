@@ -1,0 +1,32 @@
+<!-- D:\ADS lab\22510062_Assignment03\frontend\src\app\instructors\instructors.component.html -->
+
+<div class="instructor-form">
+    <h2>Add/Edit Instructor</h2>
+    <form (ngSubmit)="addInstructor()">
+      <label for="ID">ID:</label>
+      <input [(ngModel)]="instructorForm.ID" name="ID" required type="number" />
+  
+      <label for="name">Name:</label>
+      <input [(ngModel)]="instructorForm.name" name="name" required />
+  
+      <label for="dept_name">Department:</label>
+      <input [(ngModel)]="instructorForm.dept_name" name="dept_name" required />
+  
+      <label for="salary">Salary:</label>
+      <input [(ngModel)]="instructorForm.salary" name="salary" required type="number" />
+  
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  
+  <div class="instructor-list">
+    <h2>Instructor List</h2>
+    <ul>
+      <li *ngFor="let instructor of instructors">
+        {{ instructor.name }} ({{ instructor.dept_name }}) - ${{ instructor.salary }}
+        <button (click)="editInstructor(instructor)">Edit</button>
+        <button (click)="deleteInstructor(instructor.ID)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  

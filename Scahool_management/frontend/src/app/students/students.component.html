@@ -1,0 +1,32 @@
+
+
+<div class="student-form">
+    <h2>Add/Edit Student</h2>
+    <form (ngSubmit)="addStudent()">
+      <label for="ID">ID:</label>
+      <input [(ngModel)]="studentForm.ID" name="ID" required type="number" />
+  
+      <label for="name">Name:</label>
+      <input [(ngModel)]="studentForm.name" name="name" required />
+  
+      <label for="dept_name">Department:</label>
+      <input [(ngModel)]="studentForm.dept_name" name="dept_name" required />
+  
+      <label for="tot_cred">Total Credits:</label>
+      <input [(ngModel)]="studentForm.tot_cred" name="tot_cred" required type="number" />
+  
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  
+  <div class="student-list">
+    <h2>Student List</h2>
+    <ul>
+      <li *ngFor="let student of students">
+        {{ student.name }} ({{ student.dept_name }}) - {{ student.tot_cred }} credits
+        <button (click)="editStudent(student)">Edit</button>
+        <button (click)="deleteStudent(student.ID)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  

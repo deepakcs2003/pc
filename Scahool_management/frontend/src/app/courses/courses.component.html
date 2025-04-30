@@ -1,0 +1,47 @@
+<div class="container">
+  <h2>Manage Courses</h2>
+  
+  <div class="form-section">
+    <div class="form-group">
+      <label for="courseId">Course ID</label>
+      <input type="text" id="courseId" [(ngModel)]="courseForm.course_id" placeholder="Enter course ID">
+    </div>
+    
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" [(ngModel)]="courseForm.title" placeholder="Enter course title">
+    </div>
+    
+    <div class="form-group">
+      <label for="department">Department</label>
+      <input type="text" id="department" [(ngModel)]="courseForm.dept_name" placeholder="Enter department name">
+    </div>
+    
+    <div class="form-group">
+      <label for="credits">Credits</label>
+      <input type="number" id="credits" [(ngModel)]="courseForm.credits" placeholder="Enter credit hours">
+    </div>
+    
+    <button (click)="addCourse()">
+      {{ courseForm.course_id ? 'Update Course' : 'Save Course' }}
+    </button>
+  </div>
+  
+  <h3 class="section-title">Available Courses</h3>
+  
+  <div class="course-list" *ngIf="courses.length > 0">
+    <div class="course-item" *ngFor="let course of courses">
+      <div class="course-info">
+        <strong>{{ course.title }}</strong> ({{ course.dept_name }}) - {{ course.credits }} credits
+      </div>
+      <div class="action-buttons">
+        <button class="edit-btn" (click)="editCourse(course)">Edit</button>
+        <button class="delete-btn" (click)="deleteCourse(course.course_id)">Delete</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="empty-state" *ngIf="courses.length === 0">
+    No courses available. Add a course to get started.
+  </div>
+</div>
