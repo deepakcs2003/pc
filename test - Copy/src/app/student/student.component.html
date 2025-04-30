@@ -1,0 +1,139 @@
+<div class="container mt-4">
+  <!-- Dashboard Stats -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <h2>Student Dashboard</h2>
+      <div class="row mt-3">
+        <div class="col-md-4">
+          <div class="card text-center bg-light mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Tests Available</h5>
+              <h2 class="card-text">{{availableTests.length || 0}}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center bg-light mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Tests Taken</h5>
+              <h2 class="card-text">{{dashboardStats.testsTaken || 0}}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center bg-light mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Average Score</h5>
+              <h2 class="card-text">{{dashboardStats.averageScore || 0}}%</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Available Tests -->
+  <div class="row mb-4" *ngIf="!selectedTest">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Available Tests</h5>
+        </div>
+        <div class="card-body">
+          <div *ngIf="availableTests.length === 0" class="text-center py-3">
+            <p>No tests available at the moment.</p>
+          </div>
+          <div class="list-group">
+            <div *ngFor="let test of availableTests" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="mb-1">{{test.title}}</h5>
+                <small>Questions: {{test.questions?.length || 0}}</small>
+              </div>
+              <button class="btn btn-primary" (click)="selectTest(test)" [disabled]="test.questions?.length === 0">Take Test</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test Taking View -->
+  <div *ngIf="selectedTest && currentQuestion" class="row mb-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">{{selectedTest.title}}</h5>
+          <span>Question {{currentQuestionIndex + 1}} of {{selectedTest.questions?.length}}</span>
+        </div>
+        <div class="card-body">
+          <h5 class="mb-4">{{currentQuestion.question_text}}</h5>
+          
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" id="option-a" name="option" value="A" 
+                  [(ngModel)]="selectedOption">
+            <label class="form-check-label" for="option-a">A: {{currentQuestion.options?.A}}</label>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" id="option-b" name="option" value="B" 
+                  [(ngModel)]="selectedOption">
+            <label class="form-check-label" for="option-b">B: {{currentQuestion.options?.B}}</label>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" id="option-c" name="option" value="C" 
+                  [(ngModel)]="selectedOption">
+            <label class="form-check-label" for="option-c">C: {{currentQuestion.options?.C}}</label>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" id="option-d" name="option" value="D" 
+                  [(ngModel)]="selectedOption">
+            <label class="form-check-label" for="option-d">D: {{currentQuestion.options?.D}}</label>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <div>
+            <button class="btn btn-secondary me-2" (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0">Previous</button>
+            <button class="btn btn-info" (click)="nextQuestion()" [disabled]="currentQuestionIndex === selectedTest.questions.length - 1">Next</button>
+          </div>
+          <div>
+            <button class="btn btn-danger me-2" (click)="cancelTest()">Cancel Test</button>
+            <button class="btn btn-success" (click)="submitTest()" [disabled]="!selectedOption">Submit Answer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test Results -->
+  <div class="row" *ngIf="!selectedTest">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0">Test Results</h5>
+        </div>
+        <div class="card-body">
+          <div *ngIf="testResults.length === 0" class="text-center py-3">
+            <p>You haven't taken any tests yet.</p>
+          </div>
+          <div class="table-responsive">
+            <table *ngIf="testResults.length > 0" class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Test Name</th>
+                  <th>Score</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let result of testResults">
+                  <td>{{result.title}}</td>
+                  <td>{{result.score}} / {{result.total_questions}} ({{(result.score / result.total_questions * 100).toFixed(2)}}%)</td>
+                  <td>{{result.created_at | date:'medium'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

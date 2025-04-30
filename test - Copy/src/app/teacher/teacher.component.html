@@ -1,0 +1,42 @@
+<h2>Create New Test</h2>
+<div class="mb-3">
+  <label for="testTitle" class="form-label">Test Title:</label>
+  <input [(ngModel)]="newTestTitle" id="testTitle" class="form-control" placeholder="Enter title" />
+</div>
+
+<div *ngFor="let q of newQuestions; let i = index" class="mb-3">
+  <h4>Question {{ i + 1 }}</h4>
+  <div class="mb-2">
+    <input [(ngModel)]="q.question_text" class="form-control" placeholder="Question text" />
+  </div>
+  <div class="row g-3">
+    <div class="col-md-3">
+      <input [(ngModel)]="q.option_a" class="form-control" placeholder="Option A" />
+    </div>
+    <div class="col-md-3">
+      <input [(ngModel)]="q.option_b" class="form-control" placeholder="Option B" />
+    </div>
+    <div class="col-md-3">
+      <input [(ngModel)]="q.option_c" class="form-control" placeholder="Option C" />
+    </div>
+    <div class="col-md-3">
+      <input [(ngModel)]="q.option_d" class="form-control" placeholder="Option D" />
+    </div>
+  </div>
+  <div class="mt-2">
+    <input [(ngModel)]="q.correct_option" class="form-control" placeholder="Correct Option" />
+  </div>
+</div>
+<button (click)="addQuestion()" class="btn btn-primary mt-3">+ Add Question</button>
+<button (click)="createTest()" class="btn btn-success mt-3">Create Test</button>
+
+<hr>
+
+<h2>Available Tests</h2>
+<ul class="list-group">
+  <li *ngFor="let test of availableTests" class="list-group-item">
+    <strong>{{ test.title }}</strong> (ID: {{ test.id }}) 
+    <p>Created on: {{ test.created_at | date }}</p>
+    <button (click)="selectTest(test)" class="btn btn-info">View Test</button>
+  </li>
+</ul>

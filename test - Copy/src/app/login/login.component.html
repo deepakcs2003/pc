@@ -1,0 +1,52 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card p-4 shadow">
+          <h3 class="text-center mb-4">Login</h3>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="email" class="form-label">email</label>
+              <input
+                type="text"
+                id="email"
+                formControlName="email"
+                class="form-control"
+                placeholder="Enter your email"
+              />
+              <div
+                *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+                class="text-danger mt-1"
+              >
+                email is required.
+              </div>
+            </div>
+  
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                id="password"
+                formControlName="password"
+                class="form-control"
+                placeholder="Enter your password"
+              />
+              <div
+                *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                class="text-danger mt-1"
+              >
+                Password is required.
+              </div>
+            </div>
+  
+            <div class="d-grid">
+              <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
