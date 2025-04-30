@@ -1,0 +1,6 @@
+paper_id,title,classification
+P1,Intro to DB,Databases/Intro
+P2,Relational Theory,Databases/Relational
+P3,OOP Concepts,Programming/OOP
+P4,Advanced DB,Databases/Advanced
+P5,Graph Databases,Databases/NoSQL/Graph

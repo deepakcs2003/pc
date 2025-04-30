@@ -1,0 +1,21 @@
+Backend
+npm init -y 
+npm init -y
+npm install express mysql2 bcryptjs body-parser
+npm i nodemonm
+
+FrontEnd
+npm install -g @angular/cli
+ng version
+ng new my-app-name
+cd my-app-name
+ng serve
+ng serve --port 4201
+ng g c component-name
+
+CAssadr############################
+CREATE KEYSPACE IF NOT EXISTS ""
+WITH REPLICATION = {
+  'class': 'SimpleStrategy',
+  'replication_factor': 2
+};
