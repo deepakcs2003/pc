@@ -1,0 +1,22 @@
+<p>user-form works!</p>
+<div class="container">
+    <form [formGroup]="userForm">
+        <input type="email" placeholder="enter email" formControlName="email">
+        <input type="text" placeholder="enter name" formControlName="name">
+        <input type="text" placeholder="enter password" formControlName="password">
+        <div class="buttons">
+            <button type="button" (click)="addUser()">Add User</button>
+            <button type="button" (click)="getUsers()">Get All Users</button>
+        </div>
+    </form>
+
+
+    <div class="user-list" *ngIf="users.length > 0">
+        <h2>All users from backend</h2>
+        <ul>
+            <li *ngFor = 'let user of users'>
+                {{user.name}} {{user.email}} {{user.password}}
+            </li>
+        </ul>
+    </div>
+</div>
