@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h2>Welcome, {{ teacherName }}</h2>
+      <hr>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Your Courses</h5>
+        </div>
+        <div class="card-body">
+          <div class="list-group">
+            <a *ngFor="let course of courses" 
+               [routerLink]="['/teacher/courses', course.id]" 
+               class="list-group-item list-group-item-action">
+              <h5 class="mb-1">{{ course.title }}</h5>
+              <p class="mb-1 text-muted">{{ course.description }}</p>
+            </a>
+            <div *ngIf="courses.length === 0" class="text-center p-3">
+              No courses found
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+
+<div class="row mb-4">
+  <div class="col-12">
+    <h2>Admin Dashboard</h2>
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <div class="card-body text-center">
+        <h1 class="display-4">{{ studentCount }}</h1>
+        <h5 class="card-title">Students</h5>
+        <a routerLink="/admin/students" class="btn btn-primary">Manage Students</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <div class="card-body text-center">
+        <h1 class="display-4">{{ teacherCount }}</h1>
+        <h5 class="card-title">Teachers</h5>
+        <a routerLink="admin/students" class="btn btn-primary">Manage Teachers</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <div class="card-body text-center">
+        <h1 class="display-4">{{ courseCount }}</h1>
+        <h5 class="card-title">Courses</h5>
+        <a routerLink="/admin/courses" class="btn btn-primary">Manage Courses</a>
+      </div>
+    </div>
+  </div>
+</div>

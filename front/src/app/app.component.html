@@ -1,0 +1,54 @@
+
+// app.component.html
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" *ngIf="authService.isLoggedIn()">
+  <div class="container">
+    <a class="navbar-brand" href="">School Management System</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <!-- Admin Navigation -->
+        <ng-container *ngIf="authService.getCurrentUserRole() === 'admin'">
+          
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin" routerLinkActive="active">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/students" routerLinkActive="active">Students</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/teachers" routerLinkActive="active">Teachers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/courses" routerLinkActive="active">Courses</a>
+          </li>
+        </ng-container>
+        
+        <!-- Teacher Navigation -->
+        <ng-container *ngIf="authService.getCurrentUserRole() === 'teacher'">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/teacher" routerLinkActive="active">Dashboard</a>
+          </li>
+        </ng-container>
+        
+        <!-- Student Navigation -->
+        <ng-container *ngIf="authService.getCurrentUserRole() === 'student'">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/student" routerLinkActive="active">Dashboard</a>
+          </li>
+        </ng-container>
+      </ul>
+      
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>

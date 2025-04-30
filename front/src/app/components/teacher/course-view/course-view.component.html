@@ -1,0 +1,96 @@
+<div class="row mb-4" *ngIf="course">
+  <div class="col-12">
+    <h2>{{ course.title }}</h2>
+    <p class="lead">Welcome, {{ teacherName }}</p>
+    <hr>
+    <p>{{ course.description }}</p>
+  </div>
+</div>
+
+<div class="row" *ngIf="course">
+  <div class="col-md-8">
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Enrolled Students</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>PRN</th>
+                <th>Grade</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of students">
+                <td>{{ student.name }}</td>
+                <td>{{ student.prn }}</td>
+                <td>{{ getStudentGrade(student.id) !== null ? getStudentGrade(student.id) : 'Not graded' }}</td>
+                <td>
+                  <button class="btn btn-sm btn-primary" (click)="selectStudent(student)">
+                    {{ getStudentGrade(student.id) !== null ? 'Edit Grade' : 'Add Grade' }}
+                  </button>
+                </td>
+              </tr>
+              <tr *ngIf="students.length === 0">
+                <td colspan="4" class="text-center">No students enrolled</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4">
+    <div class="card" *ngIf="selectedStudent">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">{{ getStudentGrade(selectedStudent.id) !== null ? 'Edit' : 'Add' }} Grade</h5>
+      </div>
+      <div class="card-body">
+        <h6>Student: {{ selectedStudent.name }}</h6>
+        <form [formGroup]="gradeForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="score" class="form-label">Score (0-100)</label>
+            <input 
+              type="number" 
+              class="form-control" 
+              id="score" 
+              formControlName="score"
+              min="0"
+              max="100"
+              [ngClass]="{'is-invalid': gradeForm.get('score')?.touched && gradeForm.get('score')?.invalid}"
+            >
+            <div class="invalid-feedback">
+              <span *ngIf="gradeForm.get('score')?.hasError('required')">Score is required</span>
+              <span *ngIf="gradeForm.get('score')?.hasError('min') || gradeForm.get('score')?.hasError('max')">
+                Score must be between 0 and 100
+              </span>
+            </div>
+          </div>
+          
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary" [disabled]="gradeForm.invalid">
+              Save Grade
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="selectedStudent = null">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4" *ngIf="!course">
+  <div class="col-12 text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2">Loading course data...</p>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+// components/admin/student-management/student-management.component.html
+<div class="row mb-4">
+  <div class="col-12">
+    <h2>Student Management</h2>
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">{{ isEditing ? 'Edit Student' : 'Add New Student' }}</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="name" 
+              formControlName="name"
+              [ngClass]="{'is-invalid': studentForm.get('name')?.touched && studentForm.get('name')?.invalid}"
+            >
+            <div class="invalid-feedback">Name is required</div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="prn" class="form-label">PRN</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="prn" 
+              formControlName="prn"
+              [ngClass]="{'is-invalid': studentForm.get('prn')?.touched && studentForm.get('prn')?.invalid}"
+            >
+            <div class="invalid-feedback">PRN is required</div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              id="email" 
+              formControlName="email"
+              [ngClass]="{'is-invalid': studentForm.get('email')?.touched && studentForm.get('email')?.invalid}"
+            >
+            <div class="invalid-feedback">
+              <span *ngIf="studentForm.get('email')?.hasError('required')">Email is required</span>
+              <span *ngIf="studentForm.get('email')?.hasError('email')">Please enter a valid email</span>
+            </div>
+          </div>
+          
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary" [disabled]="studentForm.invalid">
+              {{ isEditing ? 'Update' : 'Add' }} Student
+            </button>
+            <button type="button" class="btn btn-secondary" *ngIf="isEditing" (click)="resetForm()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Students List</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>PRN</th>
+                <th>Email</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of students">
+                <td>{{ student.name }}</td>
+                <td>{{ student.prn }}</td>
+                <td>{{ student.email }}</td>
+                <td>
+                  <button class="btn btn-sm btn-primary me-1" (click)="editStudent(student)">Edit</button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteStudent(student.id)">Delete</button>
+                </td>
+              </tr>
+              <tr *ngIf="students.length === 0">
+                <td colspan="4" class="text-center">No students found</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

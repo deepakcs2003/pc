@@ -1,0 +1,97 @@
+<div class="row mb-4">
+  <div class="col-12">
+    <h2>Course Management</h2>
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">{{ isEditing ? 'Edit Course' : 'Add New Course' }}</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="title" class="form-label">Course Title</label>
+            <input type="text" class="form-control" id="title" formControlName="title"
+              [ngClass]="{'is-invalid': courseForm.get('title')?.touched && courseForm.get('title')?.invalid}">
+            <div class="invalid-feedback">Course title is required</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" rows="3" formControlName="description"
+              [ngClass]="{'is-invalid': courseForm.get('description')?.touched && courseForm.get('description')?.invalid}"></textarea>
+            <div class="invalid-feedback">Description is required</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="duration" class="form-label">duration</label>
+            <input class="form-control" id="duration" rows="3" formControlName="duration"
+              [ngClass]="{'is-invalid': courseForm.get('duration')?.touched && courseForm.get('duration')?.invalid}">
+            <div class="invalid-feedback">duration is required</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="teacherId" class="form-label">Teacher</label>
+            <select class="form-select" id="teacherId" formControlName="teacherId"
+              [ngClass]="{'is-invalid': courseForm.get('teacherId')?.touched && courseForm.get('teacherId')?.invalid}">
+              <option value="">-- Select Teacher --</option>
+              <option *ngFor="let teacher of teachers" [value]="teacher.id">
+                {{ teacher.name }}
+              </option>
+            </select>
+            <div class="invalid-feedback">Teacher is required</div>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary" [disabled]="courseForm.invalid">
+              {{ isEditing ? 'Update' : 'Add' }} Course
+            </button>
+            <button type="button" class="btn btn-secondary" *ngIf="isEditing" (click)="resetForm()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Courses List</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Teacher</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let course of courses">
+                <td>{{ course.title }}</td>
+                <td>{{ course.description | slice:0:50 }}{{ course.description.length > 50 ? '...' : '' }}</td>
+                <td>{{ course.teacherName }}</td>
+                <td>
+                  <button class="btn btn-sm btn-primary me-1" (click)="editCourse(course)">Edit</button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteCourse(course.id)">Delete</button>
+                </td>
+              </tr>
+              <tr *ngIf="courses.length === 0">
+                <td colspan="4" class="text-center">No courses found</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

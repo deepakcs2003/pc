@@ -1,0 +1,178 @@
+<!-- home.component.html -->
+<div class="container-fluid p-0">
+    <!-- Hero Section -->
+    <div class="hero-section text-white text-center d-flex align-items-center justify-content-center">
+      <div class="hero-content">
+        <h1 class="display-3 fw-bold mb-4">Learning Management System</h1>
+        <p class="lead mb-4">A comprehensive platform for educational institutions to manage courses, students, and resources</p>
+        <a routerLink="/login" class="btn btn-primary btn-lg px-4 me-3">Login</a>
+        <a routerLink="/signup" class="btn btn-outline-light btn-lg px-4">Sign Up</a>
+      </div>
+    </div>
+  
+    <!-- Main Content -->
+    <div class="container py-5">
+      <!-- System Overview -->
+      <section class="mb-5">
+        <h2 class="text-center mb-4">Welcome to Our Learning Platform</h2>
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <p class="text-center mb-4">
+              Our Learning Management System provides a modern, intuitive interface for educational institutions 
+              to manage their learning environment. With specialized features for administrators, teachers, and 
+              students, our platform streamlines the educational process from enrollment to graduation.
+            </p>
+          </div>
+        </div>
+      </section>
+  
+      <!-- User Roles -->
+      <section class="mb-5">
+        <h2 class="text-center mb-5">User Roles & Features</h2>
+        <div class="row g-4">
+          <!-- Admin Card -->
+          <div class="col-md-4">
+            <div class="card h-100 role-card">
+              <div class="card-body text-center">
+                <div class="role-icon bg-primary mb-3">
+                  <i class="bi bi-gear-fill"></i>
+                </div>
+                <h3 class="card-title">Administrator</h3>
+                <p class="card-text">
+                  Administrators manage the entire platform, including:
+                </p>
+                <ul class="list-group list-group-flush mb-3 text-start">
+                  <li class="list-group-item">User account management</li>
+                  <li class="list-group-item">School-wide announcements</li>
+                  <li class="list-group-item">Course creation and assignment</li>
+                  <li class="list-group-item">System configuration</li>
+                  <li class="list-group-item">Report generation and analytics</li>
+                </ul>
+                <a routerLink="/login" [queryParams]="{role: 'admin'}" class="btn btn-outline-primary">Login as Admin</a>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Teacher Card -->
+          <div class="col-md-4">
+            <div class="card h-100 role-card">
+              <div class="card-body text-center">
+                <div class="role-icon bg-success mb-3">
+                  <i class="bi bi-person-workspace"></i>
+                </div>
+                <h3 class="card-title">Teacher</h3>
+                <p class="card-text">
+                  Teachers create and manage course content:
+                </p>
+                <ul class="list-group list-group-flush mb-3 text-start">
+                  <li class="list-group-item">Course content creation</li>
+                  <li class="list-group-item">Assignment management</li>
+                  <li class="list-group-item">Student progress tracking</li>
+                  <li class="list-group-item">Grading and feedback</li>
+                  <li class="list-group-item">Communication with students</li>
+                </ul>
+                <a routerLink="/login" [queryParams]="{role: 'teacher'}" class="btn btn-outline-success">Login as Teacher</a>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Student Card -->
+          <div class="col-md-4">
+            <div class="card h-100 role-card">
+              <div class="card-body text-center">
+                <div class="role-icon bg-info mb-3">
+                  <i class="bi bi-mortarboard-fill"></i>
+                </div>
+                <h3 class="card-title">Student</h3>
+                <p class="card-text">
+                  Students access learning materials:
+                </p>
+                <ul class="list-group list-group-flush mb-3 text-start">
+                  <li class="list-group-item">Course enrollment</li>
+                  <li class="list-group-item">Access to learning materials</li>
+                  <li class="list-group-item">Assignment submission</li>
+                  <li class="list-group-item">Progress tracking</li>
+                  <li class="list-group-item">Communication with teachers</li>
+                </ul>
+                <a routerLink="/login" [queryParams]="{role: 'student'}" class="btn btn-outline-info">Login as Student</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- Features -->
+      <section class="mb-5">
+        <h2 class="text-center mb-4">Key Features</h2>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card text-center p-4 h-100">
+              <div class="feature-icon mb-3">
+                <i class="bi bi-laptop"></i>
+              </div>
+              <h4>Interactive Learning</h4>
+              <p>Engage with course material through interactive lessons, quizzes, and multimedia content.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card text-center p-4 h-100">
+              <div class="feature-icon mb-3">
+                <i class="bi bi-graph-up"></i>
+              </div>
+              <h4>Performance Analytics</h4>
+              <p>Track progress with detailed analytics and performance reports for students and classes.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card text-center p-4 h-100">
+              <div class="feature-icon mb-3">
+                <i class="bi bi-chat-dots"></i>
+              </div>
+              <h4>Communication Tools</h4>
+              <p>Connect through messaging, discussion forums, and announcements.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card text-center p-4 h-100">
+              <div class="feature-icon mb-3">
+                <i class="bi bi-calendar-check"></i>
+              </div>
+              <h4>Assignment Management</h4>
+              <p>Create, distribute, collect, and grade assignments with ease.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- CTA Section -->
+      <section class="text-center py-5">
+        <h2 class="mb-4">Ready to Get Started?</h2>
+        <p class="lead mb-4">Join thousands of educational institutions already using our platform</p>
+        <div class="d-flex justify-content-center gap-3">
+          <a routerLink="/signup" class="btn btn-primary btn-lg">Sign Up Now</a>
+          <a routerLink="/login" class="btn btn-outline-secondary btn-lg">Login</a>
+        </div>
+      </section>
+    </div>
+  
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Learning Management System</h5>
+            <p>Empowering education through technology</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">About</a></li>
+              <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Contact</a></li>
+              <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Privacy Policy</a></li>
+              <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Terms of Service</a></li>
+            </ul>
+            <p class="mt-2 mb-0">© 2025 Learning Management System. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>

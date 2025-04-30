@@ -1,0 +1,105 @@
+
+<div class="row mb-4">
+  <div class="col-12">
+    <h2>Teacher Management</h2>
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">{{ isEditing ? 'Edit Teacher' : 'Add New Teacher' }}</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="teacherForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="name" 
+              formControlName="name"
+              [ngClass]="{'is-invalid': teacherForm.get('name')?.touched && teacherForm.get('name')?.invalid}"
+            >
+            <div class="invalid-feedback">Name is required</div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              id="email" 
+              formControlName="email"
+              [ngClass]="{'is-invalid': teacherForm.get('email')?.touched && teacherForm.get('email')?.invalid}"
+            >
+            <div class="invalid-feedback">
+              <span *ngIf="teacherForm.get('email')?.hasError('required')">Email is required</span>
+              <span *ngIf="teacherForm.get('email')?.hasError('email')">Please enter a valid email</span>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="subjects" class="form-label">Subjects (comma separated)</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="subjects" 
+              formControlName="subjects"
+              [ngClass]="{'is-invalid': teacherForm.get('subjects')?.touched && teacherForm.get('subjects')?.invalid}"
+              placeholder="Math, Science, etc."
+            >
+            <div class="invalid-feedback">At least one subject is required</div>
+          </div>
+          
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary" [disabled]="teacherForm.invalid">
+              {{ isEditing ? 'Update' : 'Add' }} Teacher
+            </button>
+            <button type="button" class="btn btn-secondary" *ngIf="isEditing" (click)="resetForm()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Teachers List</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subjects</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let teacher of teachers">
+                <td>{{ teacher.name }}</td>
+                <td>{{ teacher.email }}</td>
+                <td>{{ teacher.subjects.join(', ') }}</td>
+                <td>
+                  <button class="btn btn-sm btn-primary me-1" (click)="editTeacher(teacher)">Edit</button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteTeacher(teacher.id)">Delete</button>
+                </td>
+              </tr>
+              <tr *ngIf="teachers.length === 0">
+                <td colspan="4" class="text-center">No teachers found</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

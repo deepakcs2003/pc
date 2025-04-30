@@ -1,0 +1,96 @@
+<div class="container mt-4">
+  <div class="row mb-4">
+    <div class="col-md-8">
+      <h1>Welcome, {{studentName}}</h1>
+    </div>
+    <div class="col-md-4 text-end">
+      <button class="btn btn-outline-primary" (click)="refreshDashboard()">
+        <i class="bi bi-arrow-clockwise"></i> Refresh
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-3">Loading your dashboard...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+    {{error}}
+    <button class="btn btn-sm btn-danger ms-3" (click)="loadStudentData()">Try Again</button>
+  </div>
+
+  <div *ngIf="!isLoading && !error" class="dashboard-content">
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+      <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">Enrolled Courses</h5>
+            <h2 class="display-4">{{getEnrolledCoursesCount()}}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">Completed Courses</h5>
+            <h2 class="display-4">{{getCompletedCoursesCount()}}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">Current GPA</h5>
+            <h2 class="display-4">{{calculateGPA()}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Courses List -->
+    <div class="card shadow-sm">
+      <div class="card-header bg-light">
+        <h3 class="card-title mb-0">My Courses</h3>
+      </div>
+      <div class="card-body">
+        <div *ngIf="courses.length === 0" class="text-center py-4">
+          <i class="bi bi-book display-4 text-muted"></i>
+          <p class="lead mt-3">You are not enrolled in any courses.</p>
+        </div>
+
+        <div *ngIf="courses.length > 0" class="row">
+          <div *ngFor="let course of courses" class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+              <div class="card-header">
+                <h5 class="card-title mb-0">{{course.title}}</h5>
+              </div>
+              <div class="card-body">
+                <p class="card-text">{{course.description}}</p>
+                <div class="d-flex justify-content-between">
+                  <span><strong>Teacher:</strong> {{course.teacherName}}</span>
+                  <span [ngClass]="getGradeClass(getGrade(course.id))">
+                    <strong>Grade:</strong> {{getGradeLetter(getGrade(course.id))}}
+                    <span class="badge rounded-pill" [ngClass]="getGradeClass(getGrade(course.id))">
+                      {{getGrade(course.id) || 'N/A'}}
+                    </span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-footer bg-white">
+                <a [routerLink]="['/student/courses', course.id]" class="btn btn-primary w-100">
+                  View Course
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

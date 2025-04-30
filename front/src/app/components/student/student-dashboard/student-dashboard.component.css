@@ -1,0 +1,56 @@
+.card {
+    transition: transform 0.3s ease;
+    border-radius: 0.5rem;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .text-success {
+    color: #28a745 !important;
+  }
+  
+  .text-primary {
+    color: #007bff !important;
+  }
+  
+  .text-info {
+    color: #17a2b8 !important;
+  }
+  
+  .text-warning {
+    color: #ffc107 !important;
+  }
+  
+  .text-danger {
+    color: #dc3545 !important;
+  }
+  
+  .text-secondary {
+    color: #6c757d !important;
+  }
+  
+  .badge.text-success {
+    background-color: #d4edda;
+  }
+  
+  .badge.text-primary {
+    background-color: #cce5ff;
+  }
+  
+  .badge.text-info {
+    background-color: #d1ecf1;
+  }
+  
+  .badge.text-warning {
+    background-color: #fff3cd;
+  }
+  
+  .badge.text-danger {
+    background-color: #f8d7da;
+  }
+  
+  .badge.text-secondary {
+    background-color: #e2e3e5;
+  }
